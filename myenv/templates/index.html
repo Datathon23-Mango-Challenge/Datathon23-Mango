@@ -1,79 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Imágenes de Productos</title>
-    <!-- Bootstrap CSS link (make sure to include it in your project) -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        /* Additional styles if needed */
-        body {
-            padding: 20px;
-            background-color: #f8f9fa; /* Light gray background color */
-        }
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Imágenes de Productos</title>
+   <!-- Bootstrap CSS link (make sure to include it in your project) -->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+   <style>
+       /* Additional styles if needed */
+       body {
+           padding: 20px;
+           background-color: #f8f9fa; /* Light gray background color */
+       }
 
-        /* Center the images and add some spacing */
-        .center-images {
-            text-align: center;
-            margin-top: 20px;
-        }
+       /* Center the images and add some spacing */
+       .center-images {
+           text-align: center;
+           margin-top: 20px;
+       }
 
-        .center-images .card {
-            width: 12rem;
-            margin: 10px;
-            border: none; /* Remove card borders */
-            cursor: pointer;
-            transition: transform 0.2s ease-in-out;
-            display: inline-block;
-        }
+       .center-images .card {
+           width: 12rem;
+           margin: 10px;
+           border: none; /* Remove card borders */
+           cursor: pointer;
+           transition: transform 0.2s ease-in-out;
+           display: inline-block;
+       }
 
-        .center-images .card:hover {
-            transform: scale(1.05); /* Enlarge card on hover */
-        }
+       .center-images .card:hover {
+           transform: scale(1.05); /* Enlarge card on hover */
+       }
 
-        .center-images img {
-            border-radius: 8px; /* Rounded corners for images */
-        }
+       .center-images img {
+           border-radius: 8px; /* Rounded corners for images */
+       }
 
-        .modal-dialog {
-            max-width: 80vw; /* Set max width for modal dialog */
-        }
-    </style>
+       .modal-dialog {
+           max-width: 100vw; /* Set max width for modal dialog */
+           max-height: 100vh; /* Set max height for modal dialog */
+       }
+   </style>
 </head>
 <body>
-    <div class="container">
-        <h1 class="text-center">Imágenes de Productos</h1>
+   <div class="container">
+       <h1 class="text-center">Imágenes de Productos</h1>
 
-        <div class="center-images">
-            {% for path in image_paths %}
-                <!-- Bootstrap Card component to display images -->
-                <div class="card" data-bs-toggle="modal" data-bs-target="#imageModal{{ loop.index }}">
-                    <img src="{{ url_for('static', filename=path) }}" class="card-img-top" alt="Product Image">
-                </div>
+       <div class="center-images">
+           {% for path in image_paths %}
+               <!-- Bootstrap Card component to display images -->
+               <div class="card" data-bs-toggle="modal" data-bs-target="#imageModal{{ loop.index }}">
+                   <img src="{{ url_for('static', filename=path) }}" class="card-img-top" alt="Product Image">
+               </div>
 
-                <!-- Bootstrap Modal component for larger image view -->
-                <div class="modal fade" id="imageModal{{ loop.index }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <img src="{{ url_for('static', filename=path) }}" class="img-fluid" alt="Product Image">
-                            </div>
-                        </div>
-                    </div>
-                </div> 
-
-                {% if loop.index % 4 == 0 %}
-                    <br>
-                {% endif %}
-
-            {% endfor %}
+               
+<!-- Bootstrap Modal component for full-screen image view -->
+<div class="modal fade" id="imageModal{{ loop.index }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <img src="{{ url_for('static', filename=path) }}" class="img-fluid" alt="Product Image">
+            </div>
         </div>
     </div>
+</div>
 
-    <!-- Bootstrap JS and Popper.js links (make sure to include them in your project) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+
+               {% if loop.index % 4 == 0 %}
+                   <br>
+               {% endif %}
+           {% endfor %}
+       </div>
+   </div>
+
+   <!-- Bootstrap JS and Popper.js links (make sure to include them in your project) -->
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
 

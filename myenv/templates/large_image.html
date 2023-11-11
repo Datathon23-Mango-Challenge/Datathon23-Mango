@@ -1,0 +1,38 @@
+<!-- templates/large_image.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Large Image View</title>
+    <!-- Bootstrap CSS link (make sure to include it in your project) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Additional styles if needed */
+        body {
+            padding: 20px;
+            background-color: #f8f9fa; /* Light gray background color */
+        }
+
+        .center-image {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .center-image img {
+            max-width: 100%;
+            border-radius: 8px; /* Rounded corners for images */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="center-image">
+            <img src="{{ url_for('static', filename=filename) }}" class="img-fluid" alt="Large Product Image">
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js links (make sure to include them in your project) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
