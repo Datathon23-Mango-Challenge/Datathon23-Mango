@@ -6,7 +6,7 @@ app = Flask(__name__)
 @app.route('/')
 def show_images():
     # Carga los datos
-    data = pd.read_csv('/home/pmorente/Documents/Projects/Datathon23-Mango/Datathon23-Mango/myenv/static/csvs/merged_data.csv')
+    data = pd.read_csv('./static/csvs/merged_data.csv')
     # Toma solo los primeros 5 registros
     #unique_merged_data = data.drop_duplicates(subset=['cod_modelo_color'])
     random_eight_unique_records = data.sample(n=8)
