@@ -3,7 +3,7 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Imágenes de Productos</title>
+   <title>OutfitGPT</title>
    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
    <style>
        body {
@@ -32,11 +32,137 @@
            max-width: 100vw;
            max-height: 100vh;
        }
+       .selected-card {
+      border: 2px solid #007bff !important; /* Blue border */
+       }
+       .my-outfits-section {
+      background: url('https://wallsneedlove.com/cdn/shop/products/w0284_1s_Black-and-White-Floral-Pattern-Wallpaper-for-Walls-Sketch-Floral_Repeating-Pattern-Sample-1.jpg?v=1604089102') no-repeat center center fixed;
+      background-size: cover;
+      color: #000; /* Text color set to black */
+      padding: 100px 0;
+      text-align: center;
+    }
+
+    .section-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    h2 {
+      font-size: 3em;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.2em;
+    }
+
+    .btn-primary {
+      background-color: #3498db;
+      border-color: #3498db;
+    }
+
+    .btn-primary:hover {
+      background-color: #2980b9;
+      border-color: #2980b9;
+    }
+
+    .myoutfit .container {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .myoutfit .overlay-container {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(255, 255, 255, 0.8); /* White with transparency */
+            z-index: 1;
+        }
+
+        .myoutfit .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 20px;
+            z-index: 2;
+        }
+
+        .myoutfit .image-gallery {
+            display: none;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .myoutfit .image-gallery.show {
+            display: flex;
+        }
+
+        .myoutfit .image-gallery img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 10px;
+        }
+
+        .myoutfit .btn-primary {
+            margin-top: 10px;
+        }
+
+        .modal-dialog.modal-fullscreen {
+            background: linear-gradient(45deg, rgb(238, 206, 164), rgb(236, 236, 168)); /* Segundo color de fondo */
+            color: #ffffff;
+            padding: 20px;
+        }
+
+
+        .modal-content {
+            background: linear-gradient(45deg, rgb(238, 206, 164), rgb(236, 236, 168)); /* Segundo color de fondo */
+            color: #ffffff;
+            padding: 20px;
+        }
+
+        .arrow-button {
+            /* Otros estilos para el botón */
+            position: absolute; /* o "fixed" según tus necesidades */
+            transform: translateX(-50%); /* Centra el botón en el eje horizontal */
+            right: 150px;
+            width: 110px; /* Ancho del botón */
+            height: 100px; /* Alto del botón */
+            font-size: 30px; /* Tamaño de fuente del texto en el botón */
+            background-color: #dad5d5; /* Color de fondo normal */
+            color: #000000; /* Color de texto normal */
+            border: none;
+            border-radius: 30px;
+            text-align: center; /* Centra horizontalmente el texto */
+            cursor: pointer;
+            transition: transform 0.3s ease; /* Transición suave para el cambio de escala */
+        }
+
+
+
+
+        .arrow-button:hover {
+            position: absolute; /* o "fixed" según tus necesidades */
+            right: 150px;
+            color: #000000; /* Color de texto al pasar el cursor */
+            background-color: #d4c3c3; /* Color de fondo normal */
+            border: none;
+            text-align: center; /* Centra horizontalmente el texto */
+            transform: translateX(-50%) scale(1.1); /* Translada el botón horizontalmente y escala al pasar el cursor (ajusta según sea necesario) */
+        }
+
+
+
    </style>
 </head>
 <body>
    <div class="container">
-       <h1 class="text-center">Imágenes de Productos</h1>
+       <h1 class="text-center">OutfitGPT</h1>
        <div class="center-images">
            {% for main_image, related_images in images_info.items() %}
                <div class="card" data-bs-toggle="modal" data-bs-target="#imageModal{{ loop.index }}">
@@ -46,9 +172,6 @@
                <div class="modal fade" id="imageModal{{ loop.index }}" tabindex="-1" aria-hidden="true">
                    <div class="modal-dialog modal-fullscreen">
                        <div class="modal-content">
-                           <div class="modal-header">
-                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                           </div>
                            <div class="modal-body d-flex align-items-center justify-content-start">
                                <img src="{{ url_for('static', filename=main_image) }}" class="img-fluid" alt="Product Image" style="margin-left: 250px;">
 
@@ -57,7 +180,7 @@
                                    <div class="row">
                                        {% for image in related_images[:3] %}
                                            <div class="col-md-4 text-center">
-                                               <div class="card">
+                                               <div class="card selecards">
                                                    <img src="{{ url_for('static', filename=image) }}" class="card-img-top" alt="Related Image">
                                                </div>
                                            </div>
@@ -68,14 +191,24 @@
                                    <div class="row">
                                        {% for image in related_images[3:6] %}
                                            <div class="col-md-4 text-center">
-                                               <div class="card">
+                                               <div class="card selecards">
                                                    <img src="{{ url_for('static', filename=image) }}" class="card-img-top" alt="Related Image">
                                                </div>
                                            </div>
                                        {% endfor %}
                                    </div>
                                </div>
+                                <button type="button" style= "font-size:18px;" class="arrow-button" data-bs-dismiss="modal">
+                                    Keeping Looking 
+                                </button>
                            </div>
+                           <div class="text-center">
+                            <button class="btn mb-3 saveButton" style="background-color: rgba(212, 8, 110, 0.3); color: #000; padding:10px; ">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                                    <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                                  </svg> Choose My Outfit
+                            </button>
+                          </div>
                        </div>
                    </div>
                </div>
@@ -85,7 +218,281 @@
            {% endfor %}
        </div>
    </div>
+<!-- Bootstrap Modal for outfit name -->
+<div class="modal" tabindex="-1" role="dialog" id="outfitModal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Enter Outfit Name</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <input type="text" class="form-control" id="outfitNameInput" placeholder="Outfit Name">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" id="saveOutfitBtn" data-bs-dismiss="modal">Save Outfit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+ <br>
+  <div class="container center" style="width:100%;">
+  <button class="btn btn-primary"  onclick="randomGenerateOptions()">Generate Random Options</button>
+  <br>
+  <div class="search-container" style="margin:auto; width: 50%; ">
+    <input type="text" class="form-control mb-2" placeholder="Search for your outfit..." aria-label="Search">
+  </div>
+  </div>
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+  <section class="my-outfits-section" style="width:100% !important;">
+    <div class="section-content">
+        <br>
+        <br>
+        <div class="myoutfit overlay-container"></div>
 
+<div class="myoutfit container" style=" margin-left: 20px; margin-right: 80px; ">
+    <div class="row">
+        <div class="col-md-6 myoutfit button-container" style="background-color: rgba(255, 191, 95, 0.9);">
+            <div class="container">
+                <h2>MyOutfits Manager</h2>
+
+                
+            </div>
+            <p>My outfits Mango collections.</p>
+             <br>
+            <button class="myoutfit btn btn-light" onclick="showGallery('gallery1')">Jorge's Outfit</button>
+            <br>
+            <button class="myoutfit btn btn-light" onclick="showGallery('gallery2')">Xiaolei's Outfit</button>
+            <br>
+            <button class="myoutfit btn btn-light" onclick="showGallery('gallery3')">Bilal's Outfit</button>
+            <br>
+            <button class="myoutfit btn btn-light" onclick="showGallery('gallery4')">Pau's Outfit</button>
+            
+            <!-- Add more buttons as needed -->
+        </div>
+
+        <div class="col-md-6 myoutfit text-end" style="background-color: rgba(247, 218, 176, 0.8);" >
+            <div class="row">
+                <div class="col-6 myoutfit image-gallery" id="gallery1">
+                    <!-- Replace placeholder images with your actual image URLs for Gallery 1 -->
+                    <img src="/static/datathon/images/2019_53010582_BL.jpg" alt="Image 1">
+                    <img src="/static/datathon/images/2019_51020639_12.jpg" alt="Image 2">
+                </div>
+                <div class="col-6 myoutfit image-gallery" id="gallery1">
+                    <!-- Replace placeholder images with your actual image URLs for Gallery 1 -->
+                    <img src="/static/datathon/images/2019_53070592_08.jpg" alt="Image 3">
+                    <img src="/static/datathon/images/2019_53070602_TO.jpg" alt="Image 8">
+                    <img src="/static/datathon/images/2019_57047881_OR.jpg" alt="Image 5">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6 myoutfit image-gallery" id="gallery2">
+                    <!-- Replace placeholder images with your actual image URLs for Gallery 2 -->
+                    <img src="/static/datathon/images/2019_57025904_15.jpg" alt="Image 4">
+                    <img src="/static/datathon/images/2019_53063785_15.jpg" alt="Image 5">
+                    <img src="/static/datathon/images/2019_57047881_OR.jpg" alt="Image 5">
+                </div>
+                <div class="col-6 myoutfit image-gallery" id="gallery2">
+                    <!-- Replace placeholder images with your actual image URLs for Gallery 2 -->
+                    <img src="/static/datathon/images/2019_53055768_99.jpg" alt="Image 6">
+                    <img src="/static/datathon/images/2019_53005032_05.jpg" alt="Image 7">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6 myoutfit image-gallery" id="gallery3">
+                    <!-- Replace placeholder images with your actual image URLs for Gallery 1 -->
+                    <img src="/static/datathon/images/2023_47005943_01.jpg" alt="Image 1">
+                    <img src="/static/datathon/images/2023_47040358_OR.jpg" alt="Image 2">
+                </div>
+                <div class="col-6 myoutfit image-gallery" id="gallery3">
+                    <!-- Replace placeholder images with your actual image URLs for Gallery 1 -->
+                    <img src="/static/datathon/images/2023_47003773_01.jpg" alt="Image 3">
+                    <img src="/static/datathon/images/2023_57093796_05.jpg" alt="Image 8">
+                    <img src="/static/datathon/images/2023_47043772_TO.jpg" alt="Image 5">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6 myoutfit image-gallery" id="gallery4">
+                    <!-- Replace placeholder images with your actual image URLs for Gallery 2 -->
+                    <img src="/static/datathon/images/2019_53095742_92.jpg" alt="Image 5"> 
+                    <img src="/static/datathon/images/2019_53053731_94.jpg" alt="Image 5">
+                    <img src="/static/datathon/images/2019_57064001_37.jpg" alt="Image 4">
+                </div>
+                <div class="col-6 myoutfit image-gallery" id="gallery4">
+                    <!-- Replace placeholder images with your actual image URLs for Gallery 2 -->
+                    <img src="/static/datathon/images/2019_53073754_OR.jpg" alt="Image 6">
+                    
+                </div>
+            </div>
+
+            <!-- Add more rows as needed -->
+        </div>
+    </div>
+</div>
+
+        
+
+        <br>
+        <br>
+      
+    </div>
+  </section>
+  
+  <div id="output"></div>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+   <script>
+    function showGallery(galleryId) {
+        var galleries = document.querySelectorAll('.myoutfit .image-gallery');
+        
+        galleries.forEach(function(gallery) {
+            if (gallery.id === galleryId) {
+                gallery.classList.toggle('show');
+            } else {
+                gallery.classList.remove('show');
+            }
+        });
+    }
+</script>
+   <script>
+    var selectedOutfitName = ""; // Variable to store the current outfit name
+
+    var saveButtons = document.querySelectorAll('.saveButton');
+
+    saveButtons.forEach(function (saveButton) {
+        saveButton.addEventListener('click', function () {
+            var modalId = this.dataset.bsTarget;
+
+            if (!this.dataset.saveButtonClicked || this.dataset.saveButtonClicked === 'false') {
+                // Change button text to "Save My Outfit"
+                this.innerHTML = '<span class="bi bi-heart-fill"></span> Save My Outfit';
+                this.dataset.saveButtonClicked = 'true';
+
+                // Now that the button is clicked, make cards with the class 'selecards' clickable
+                document.querySelectorAll('.selecards[data-bs-target="' + modalId + '"]').forEach(function (card) {
+                    card.addEventListener('click', function () {
+                        toggleCard(this);
+                    });
+                });
+            } else {
+                // Change button text back to "Choose My Outfit"
+                this.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16"><path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/></svg> Choose My Outfit';
+                this.dataset.saveButtonClicked = 'false';
+
+                // Now that the button is unclicked, make cards with the class 'selecards' unclickable
+                document.querySelectorAll('.selecards[data-bs-target="' + modalId + '"]').forEach(function (card) {
+                    card.removeEventListener('click', function () {
+                        toggleCard(this);
+                    });
+                });
+
+                // Prompt user for outfit name
+                var outfitName = prompt('Enter a name for your outfit:');
+                if (outfitName) {
+                    // Save the current outfit name
+                    selectedOutfitName = outfitName;
+
+                    // Do something with the selected outfit name, e.g., display it
+                    console.log('Selected Outfit Name:', selectedOutfitName);
+                }
+            }
+        });
+    });
+
+    // Function to toggle the selected-card class on a card
+    function toggleCard(card) {
+        card.classList.toggle('selected-card');
+
+        if (card.classList.contains('selected-card')) {
+            // Add the selected card's image path to the array with the current outfit name
+            selectedCards.push({
+                outfitName: selectedOutfitName,
+                imagePath: card.querySelector('img').src
+            });
+        } else {
+            // Remove the selected card's image path from the array
+            var index = selectedCards.findIndex(function (item) {
+                return item.outfitName === selectedOutfitName && item.imagePath === card.querySelector('img').src;
+            });
+
+            if (index !== -1) {
+                selectedCards.splice(index, 1);
+            }
+        }
+
+        // Print the selected cards
+        printSelectedCards();
+    }
+
+    // Function to print the selected cards
+    function printSelectedCards() {
+        var displayElement = document.getElementById("output");
+
+        if (displayElement) {
+            displayElement.innerHTML = "";
+
+            // Loop through the selected cards and append each card's image to the display element
+            for (var i = 0; i < selectedCards.length; i++) {
+                var cardElement = document.createElement("img");
+                cardElement.src = selectedCards[i].imagePath;
+                cardElement.alt = "Selected Card";
+                cardElement.style.width = "100px"; // Adjust the width as needed
+                displayElement.appendChild(cardElement);
+            }
+        } else {
+            console.error("Display element not found!");
+        }
+    }
+
+    // Initialize the selected cards array
+    var selectedCards = [];
+</script>
+
+
+<script>
+    function printSelectedCards() {
+        // Get the element where you want to display the selected cards
+        var displayElement = document.getElementById("output");
+
+        // Check if the element exists
+        if (displayElement) {
+            // Clear the existing content
+            displayElement.innerHTML = "";
+
+            // Loop through the selected cards and append each card's image to the display element
+            for (var i = 0; i < selectedCards.length; i++) {
+                var cardElement = document.createElement("img");
+                cardElement.src = selectedCards[i].querySelector('img').src;
+                cardElement.alt = "Selected Card";
+                cardElement.style.width = "100px"; // Adjust the width as needed
+                displayElement.appendChild(cardElement);
+            }
+        } else {
+            console.error("Display element not found!");
+        }
+    }
+
+    // Call the function to display initially selected cards
+    printSelectedCards();
+</script>
+
+
+<script>
+    function randomGenerateOptions() {
+      location.reload();
+    }
+  </script>
+
+  
+
 </body>
 </html>
