@@ -17,14 +17,6 @@ Photo: Main Page
 
 The Main Page of OutfitGPT serves as the entry point for users to input their preferences and generate outfits. The following elements are featured on the Main Page:
 
-### Input Preferences
-
-Generated patterns are created using the following main parameters:
-
-- **Colors:** Select preferred colors for different clothing items.
-- **Family Members:** Choose the family members of clothing items (e.g., tops, bottoms, shoes).
-- **Style Preferences:** Indicate the desired style, such as casual, formal, sporty, etc.
-
 ### Random Values and Seed
 
 For added spontaneity and creativity, users have random values in the outfit main page to use as seed. They can also specify a seed using the search bar (not implemented, will use same function).
@@ -33,6 +25,11 @@ For added spontaneity and creativity, users have random values in the outfit mai
 
 When the seed is clicked, creates an outfit for that piece of clothing. 
 
+Generated patterns are created using the following main parameters:
+
+- **Colors:** Select preferred colors for different clothing items.
+- **Family Members:** Choose the family members of clothing items (e.g., tops, bottoms, shoes).
+- **Style Preferences:** Indicate the desired style, such as casual, formal, sporty, etc.
 ## Outfit Manager
 
 The Outfit Manager is a centralized space where users can organize, save, and visualize their selected outfits. Key features of the Outfit Manager include:
