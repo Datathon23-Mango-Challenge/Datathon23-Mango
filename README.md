@@ -48,15 +48,15 @@ The Outfit Manager is a centralized space where users can organize, save, and vi
 
 ## Generated Outfit Page
 
-Once an outfit is generated, users are directed to a page featuring the details of the outfit. This page includes:
+Once an outfit is generated, users are directed to a page featuring the details of the outfit. This page includes the selected clothing pieces that our algorithm choosed and thinks looks good with the pre-seed.
+In the examples, the photo in the left alone, is the seed clothing piece. 
+
 Example 1:
 <img src="resources/generated1-outfit.png">
 
+
 Example 2:
 <img src="resources/generated2-outfit.png">
-### Outfit Details
-
-- **Colors, Family Members, and Style:** Detailed information about the colors, family members, and style of each clothing item in the generated outfit.
 
 ### Choose Outfit Button (Half Implemented)
 
@@ -78,7 +78,7 @@ The combination of the Main Page, Outfit Manager (focused on visualization), and
 
 
 
-# MANGO CHALLENGE INITIAL STATEMENT
+# MANGO CHALLENGE Initial Statement
 
 ## Fashion Compatibility Challenge <img src="resources/icon.png" align="right" height=100/>
 
