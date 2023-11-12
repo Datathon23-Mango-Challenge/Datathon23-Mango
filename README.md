@@ -1,17 +1,16 @@
-# UPC Datathon 2023 Mango-Challenge
+# OutfitGPT
+## UPC Datathon 2023 Mango-Challenge
 
 Xiaolei Xu, 
 Bilal Moussaouri, 
 Jorge Gil,
 Pau Morente
 
-# OutfitGPT
-
 ## Overview
 
 <img src="resources/main.png">
 
-
+Photo: Main Page
 # OutfitGPT User Interface Overview
 
 ## Main Page
@@ -80,6 +79,12 @@ The combination of the Main Page, Outfit Manager (focused on visualization), and
 
 
 
+
+
+# MANGO CHALLENGE INITIAL STATEMENT
+
+## Fashion Compatibility Challenge <img src="resources/icon.png" align="right" height=100/>
+
 This challenge aims to create a model capable of generating outfit recommendations based on a given initial product. Fashion matching is complex due to the nuanced patterns and visual details that dictate whether products pair well together, often going beyond mere product metadata. For instance, it's not straightforward to determine if a violet satin dress, white sandals, and a silver chic bag make a good outfit without seeing the items.
  
 The essence of a good outfit often lies in the complementary nature of different products rather than their similarity. The task here is to extract and model these visual features to predict matching products effectively. One approach to address this is the "Fill in the Blank" task, where the goal is to predict a missing item in a given outfit from a list of candidate products. This task serves as a stepping stone towards generating complete outfits from a single product. However, participants are encouraged to explore other innovative solutions to this challenge as well.
@@ -87,10 +92,6 @@ The essence of a good outfit often lies in the complementary nature of different
 Participants will have the opportunity to work with real outfits curated by stylists and fashion experts at MANGO and exhibit their proficiency in navigating a software development environment while adhering to strict deadlines and maintaining performance under a high-pressure scenario.
 
 
-
-
-
-# Fashion Compatibility Challenge <img src="resources/icon.png" align="right" height=100/>
 ## Brief Data Overview
 Participants will access two datasets and images.
 
